@@ -41,10 +41,6 @@ public class App {
             System.out.printf("%d / %s / %s", wiseSaying.id, wiseSaying.content,wiseSaying.author);
         }
 
-//        for(int i=wiseSayingsLastIndex; i>= 0; i--){
-//            WiseSaying wiseSaying = wiseSayings[i];
-//            System.out.printf("%d / %s / %s", wiseSaying.id, wiseSaying.content,wiseSaying.author);
-//        }
     }
     void actionWrite(){
         System.out.print("명언 : ");
@@ -131,11 +127,11 @@ public class App {
         }
 
         System.out.printf("명언(기존) : %s", wiseSaying.content);
-        System.out.printf("명언 : ");
+        System.out.print("명언 : ");
         String content = scanner.nextLine().trim();
 
         System.out.printf("작가(기존) : %s", wiseSaying.author);
-        System.out.printf("작가 : ");
+        System.out.print("작가 : ");
         String author = scanner.nextLine().trim();
 
         modify(wiseSaying, content, author);
