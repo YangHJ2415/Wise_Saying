@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        WiseSaying wiseSaying = null;
         int lastId = 0;
 
         System.out.println("== 명언 앱 ==");
@@ -24,17 +25,17 @@ public class Main {
 
                 int id = ++lastId;
 
-                WiseSaying wiseSaying = new WiseSaying();
+                wiseSaying = new WiseSaying();
                 wiseSaying.id = id;
                 wiseSaying.content = wiseSayingContent;
                 wiseSaying.author = wiseSayingAuthor;
 
-                System.out.println("==========================");
-                System.out.println("id : %d".formatted(wiseSaying.id));
-                System.out.println("명언 : %s".formatted(wiseSaying.content));
-                System.out.println("작가 : %s".formatted(wiseSaying.author));
-
                 System.out.println("%d번 명언이 등록되었습니다.".formatted(id));
+            } else if (cmd.equals("목록")){
+                if(wiseSaying == null) continue; // 명언이 등록되지 않았을 때
+                System.out.println("번호 / 작가 / 명언");
+                System.out.println("==========================");
+                System.out.println("%d / %s / %s".formatted(wiseSaying.id, wiseSaying.content,wiseSaying.author));
             }
         }
     }
