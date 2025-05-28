@@ -39,7 +39,7 @@ public class App {
 
         List<WiseSaying> forListWiseSayings = findForList();
         for (WiseSaying wiseSaying : forListWiseSayings){
-            System.out.printf("%d / %s / %s", wiseSaying.getId(), wiseSaying.getContent(),wiseSaying.getAuthor());
+            System.out.printf("%d / %s / %s %n", wiseSaying.getId(), wiseSaying.getContent(),wiseSaying.getAuthor());
         }
 
     }
@@ -63,9 +63,9 @@ public class App {
 
         int id = Integer.parseInt(cmdBits[1]);
 
-        int deleteIndex = delete(id);
+        boolean deleted = delete(id);
 
-        if (deleteIndex == -1){ // 존재 하지 않는 명언에 대한 예외처리, 한번 삭제된 번호는 재사용 x
+        if (!deleted){ // 존재 하지 않는 명언에 대한 예외처리, 한번 삭제된 번호는 재사용 x
             System.out.printf("%d번 명언은 존재하지 않습니다.%n", id);
             return;
         }
@@ -109,14 +109,15 @@ public class App {
         return wiseSaying;
     }
 
-    private int delete(int id){
-        int deleteIndex = findIndexById(id);
-
-        if (deleteIndex == -1) return deleteIndex;
-
-        wiseSayings.remove(deleteIndex);
-
-        return deleteIndex;
+    private boolean delete(int id){
+//        int deleteIndex = findIndexById(id);
+//
+//        if (deleteIndex == -1) return deleteIndex;
+//
+//        wiseSayings.remove(deleteIndex);
+//
+//        return deleteIndex;
+        return wiseSayings.removeIf(wiseSaying -> wiseSaying.getId() == id);
     }
 
     private void modify(WiseSaying wiseSaying, String content, String author){
@@ -125,12 +126,16 @@ public class App {
     }
 
     private int findIndexById(int id){
-        for (int i=0; i <= wiseSayings.size(); i++){
-            if (wiseSayings.get(i).getId() == id){
-                return i;
-            }
-        }
-        return -1;
+//        for (int i=0; i <= wiseSayings.size(); i++){
+//            if (wiseSayings.get(i).getId() == id){
+//                return i;
+//            }
+//        }
+//        return -1;
+        return wiseSayings.stream()
+                .map(WiseSaying::getId)
+                .toList()
+                .indexOf(id);
     }
 
     private WiseSaying findById(int id){
