@@ -38,7 +38,7 @@ public class App {
 
         WiseSaying[] forListWiseSayings = findForList();
         for (WiseSaying wiseSaying : forListWiseSayings){
-            System.out.printf("%d / %s / %s", wiseSaying.id, wiseSaying.content,wiseSaying.author);
+            System.out.printf("%d / %s / %s", wiseSaying.getId(), wiseSaying.getContent(),wiseSaying.getAuthor());
         }
 
     }
@@ -49,7 +49,7 @@ public class App {
         String author = scanner.nextLine().trim();
 
         WiseSaying wisesaying = write(content, author);
-        System.out.printf("%d번 명언이 등록되었습니다.", wisesaying.id);
+        System.out.printf("%d번 명언이 등록되었습니다.%n", wisesaying.getId());
     }
 
     int getSize() {
@@ -68,10 +68,7 @@ public class App {
     }
 
     WiseSaying write(String content, String author){
-        WiseSaying wiseSaying = new WiseSaying();
-        wiseSaying.id = ++lastId;
-        wiseSaying.content = content;
-        wiseSaying.author = author;
+        WiseSaying wiseSaying = new WiseSaying(++lastId, content, author);
         wiseSayings[++wiseSayingsLastIndex] = wiseSaying;
         return wiseSaying;
     }
@@ -89,10 +86,10 @@ public class App {
         int deleteIndex = delete(id);
 
         if (deleteIndex == -1){ // 존재 하지 않는 명언에 대한 예외처리, 한번 삭제된 번호는 재사용 x
-            System.out.printf("%d번 명언은 존재하지 않습니다.", id);
+            System.out.printf("%d번 명언은 존재하지 않습니다.%n", id);
             return;
         }
-        System.out.printf("%d번 명언이 삭제되었습니다.", id);
+        System.out.printf("%d번 명언이 삭제되었습니다.%n", id);
     }
 
     int delete(int id){
@@ -122,15 +119,15 @@ public class App {
         WiseSaying wiseSaying = findById(id);
 
         if (wiseSaying == null){
-            System.out.printf("%d번 명언은 존재하지 않습니다.", id);
+            System.out.printf("%d번 명언은 존재하지 않습니다.%n", id);
             return;
         }
 
-        System.out.printf("명언(기존) : %s", wiseSaying.content);
+        System.out.printf("명언(기존) : %s", wiseSaying.getContent());
         System.out.print("명언 : ");
         String content = scanner.nextLine().trim();
 
-        System.out.printf("작가(기존) : %s", wiseSaying.author);
+        System.out.printf("작가(기존) : %s", wiseSaying.getAuthor());
         System.out.print("작가 : ");
         String author = scanner.nextLine().trim();
 
@@ -139,7 +136,7 @@ public class App {
 
     int findIndexById(int id){
         for (int i=0; i <= wiseSayingsLastIndex; i++){
-            if (wiseSayings[i].id == id){
+            if (wiseSayings[i].getId() == id){
                 return i;
             }
         }
@@ -155,8 +152,8 @@ public class App {
     }
 
     void modify(WiseSaying wiseSaying, String content, String author){
-        wiseSaying.content = content;
-        wiseSaying.author = author;
+        wiseSaying.setContent(content);
+        wiseSaying.setAuthor(author);
     }
 
 }
