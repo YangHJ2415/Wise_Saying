@@ -5,10 +5,10 @@ import java.util.stream.IntStream;
 public class Main {
     public static void main(String[] args) {
 
-//        App app = new App();
-//        app.run();
+        App app = new App();
+        app.run();
 
-            testRq();
+//            testRq();
     }
     private static void testRq() {
         Rq rq = new Rq("목록?searchKeywordType=content&searchKeyword=자바&page=2");
