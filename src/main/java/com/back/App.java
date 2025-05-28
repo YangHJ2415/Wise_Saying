@@ -125,24 +125,11 @@ public class App {
         wiseSaying.setAuthor(author);
     }
 
-    private int findIndexById(int id){
-//        for (int i=0; i <= wiseSayings.size(); i++){
-//            if (wiseSayings.get(i).getId() == id){
-//                return i;
-//            }
-//        }
-//        return -1;
-        return wiseSayings.stream()
-                .map(WiseSaying::getId)
-                .toList()
-                .indexOf(id);
-    }
-
     private WiseSaying findById(int id){
-        int index = findIndexById(id);
-
-        if (index == -1) return null;
-
-        return wiseSayings.get(index);
+        return wiseSayings
+                .stream()
+                .filter(wiseSaying -> wiseSaying.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 }
