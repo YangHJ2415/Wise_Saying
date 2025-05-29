@@ -1,17 +1,19 @@
 package com.back;
 
+
 import com.back.domain.system.controller.SystemController;
 import com.back.domain.wisesaying.controller.WisesayingController;
+
 import java.util.Scanner;
 
 public class App {
-    private final Scanner scanner = new Scanner(System.in);
 
     public void run() {
+        final Scanner scanner = new Scanner(System.in);
         System.out.println("== 명언 앱 ==");
 
-        SystemController systemController = new SystemController();
-        WisesayingController wisesayingController = new WisesayingController(scanner);
+        SystemController systemController = AppContext.systemController;
+        WisesayingController wisesayingController = AppContext.wiseSayingController;
 
         while (true) {
             System.out.println("명령)");
