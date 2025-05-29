@@ -3,7 +3,6 @@ package com.back.domain.wisesaying.controller;
 import com.back.Rq;
 import com.back.WiseSaying;
 import com.back.domain.wisesaying.service.WisesayingService;
-
 import java.util.List;
 import java.util.Scanner;
 

@@ -1,37 +1,36 @@
 package com.back.domain.wisesaying.service;
 import com.back.WiseSaying;
-
-import java.util.ArrayList;
+import com.back.domain.wisesaying.repoitory.WiseSayingRepository;
 import java.util.List;
 
 public class WisesayingService {
-    private int lastId = 0;
-    private final List<WiseSaying> wiseSayings = new ArrayList<>();
+    private final WiseSayingRepository wiseSayingRepository;
+
+    public WisesayingService() {
+        this.wiseSayingRepository = new WiseSayingRepository();
+    }
 
     public List<WiseSaying> findForList() {
-        return wiseSayings.reversed();
+        return wiseSayingRepository.findForList();
     }
 
     public WiseSaying write(String content, String author){
-        WiseSaying wiseSaying = new WiseSaying(++lastId, content, author);
-        wiseSayings.add(wiseSaying);
+        WiseSaying wiseSaying = new WiseSaying(content, author);
+        wiseSayingRepository.save(wiseSaying);
         return wiseSaying;
     }
 
+    public WiseSaying findById(int id){
+        return wiseSayingRepository.findById(id);
+    }
+
     public boolean delete(int id){
-        return wiseSayings.removeIf(wiseSaying -> wiseSaying.getId() == id);
+        return wiseSayingRepository.deleteById(id);
     }
 
     public void modify(WiseSaying wiseSaying, String content, String author){
         wiseSaying.setContent(content);
         wiseSaying.setAuthor(author);
-    }
-
-    public WiseSaying findById(int id){
-        return wiseSayings
-                .stream()
-                .filter(wiseSaying -> wiseSaying.getId() == id)
-                .findFirst()
-                .orElse(null);
+        wiseSayingRepository.save(wiseSaying);
     }
 }
