@@ -16,12 +16,12 @@ public class WisesayingController {
     }
 
     public void actionList(){
-        System.out.println("번호 / 작가 / 명언");
+        System.out.println("번호 / 작가 / 명언 / 작성 / 수정");
         System.out.println("==========================");
 
         List<WiseSaying> forListWiseSayings = wisesayingService.findForList();
         for (WiseSaying wiseSaying : forListWiseSayings){
-            System.out.printf("%d / %s / %s %n", wiseSaying.getId(), wiseSaying.getContent(),wiseSaying.getAuthor());
+            System.out.printf("%d / %s / %s %n", wiseSaying.getId(), wiseSaying.getContent(),wiseSaying.getAuthor(), wiseSaying.getCreateDate(), wiseSaying.getModifyDate());
         }
     }
 
