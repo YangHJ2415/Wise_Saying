@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     private int lastId = 0;
-    private List<WiseSaying> wiseSayings = new ArrayList<>();
+    private final List<WiseSaying> wiseSayings = new ArrayList<>();
 
     public void run(){
         System.out.println("== 명언 앱 ==");
@@ -17,21 +17,14 @@ public class App {
 
             Rq rq = new Rq(cmd);
             switch (rq.getActionName()) {
-                case "종료":
+                case "종료" -> {
                     System.out.println("명언 앱을 종료합니다.");
                     return;
-                case "목록":
-                    actionList();
-                    break;
-                case "등록":
-                    actionWrite();
-                    break;
-                case "삭제":
-                    actionDelete(rq);
-                    break;
-                case "수정":
-                    actionModify(rq);
-                    break;
+                }
+                case "목록" -> actionList();
+                case "등록" -> actionWrite();
+                case "삭제" -> actionDelete(rq);
+                case "수정" -> actionModify(rq);
             }
         }
     }
