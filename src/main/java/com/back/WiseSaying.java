@@ -1,6 +1,7 @@
 package com.back;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class WiseSaying {
     private int id;
@@ -8,6 +9,7 @@ public class WiseSaying {
     private LocalDateTime modifyDate;
     private String content;
     private String author;
+    private static DateTimeFormatter forPrintDateTimeFormatter = DateTimeFormatter.ofPattern("yy-MM-dd HH:mm:ss");
 
     public WiseSaying(String content, String author) {
         this.content = content;
@@ -49,5 +51,13 @@ public class WiseSaying {
 
     public boolean isNew() {
         return id == 0;
+    }
+
+    public String getForPrintCreateDate() {
+        return createDate.format(forPrintDateTimeFormatter);
+    }
+
+    public String getForPrintModifyDate() {
+        return modifyDate.format(forPrintDateTimeFormatter);
     }
 }
